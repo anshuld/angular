@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app="phonecatApp" ng-controller="PhoneListCtrl">
 <head>
   <meta charset="utf-8">
-  <title>Google Phone Gallery</title>
+  <title>AKD with {{query}}</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
   <script src="bower_components/angular/angular.js"></script>
   <script src="js/controllers.js"></script>
 </head>
-<body ng-controller="PhoneListCtrl">
+<body>
 <div class="container-fluid">
   <div class="row">
   <div class="col-md-2">
@@ -24,7 +24,11 @@
   </div>
   </div>
 
-<p> Hi {{name}} - Total number of phones: {{phones.length}} </p>
+<p> Hi {{name}} - Total number of phones: {{phones.length}}  
+  <span ng-show="query.length">
+    and you have been searching for {{query}}
+  </span>
+</p>
 
 <p> <table border=true>
   <tr>    <th colspan="8">Rows from 1 to 8</th></tr>
