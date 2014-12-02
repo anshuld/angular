@@ -23,18 +23,28 @@
         <option value="-age">Oldest</option>
     </select> 
  
-  </div>
     </div>
-  </div>
-  <div class="col-md-2">
-  <ul>
-    <li ng-repeat="phone in phones | filter:query | orderBy:sortOrder">
-      <span>{{phone.name}}</span>
-      <span>{{phone.age}}</span>
-      <p>{{phone.snippet}}</p>
-    </li>
-  </ul>
-  </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy:sortOrder" class="thumbnail">
+          <a href="{{phone.imageUrl}}" class="thumb"> <img ng-src="{{phone.imageUrl}}" /></a>
+          {{phone.name}}
+          {{phone.age}}
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+    </div>
+     <div class="col-md-2">
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+            <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+            <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+            <p>{{phone.snippet}}</p>
+          </li>
+      </ul>
+    </div>
   </div>
   
 
