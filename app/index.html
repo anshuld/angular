@@ -12,7 +12,19 @@
 <div class="container-fluid">
   <div class="row">
   <div class="col-md-2">
-    Search: <input ng-model="query">{{sortOrder}}
+    <div class="container-fluid">
+      <div class="row">
+        Search: <input ng-model="query">{{sortOrder}}
+      </div>
+      <div class="row">
+    
+      Sort by: <select ng-model="sortOrder">
+        <option value="name">Alphabrtically</option>
+        <option value="-age">Oldest</option>
+    </select> 
+ 
+  </div>
+    </div>
   </div>
   <div class="col-md-2">
   <ul>
@@ -24,14 +36,8 @@
   </ul>
   </div>
   </div>
-  <div class="row">
-    <div class="col-md-2">
-      Sort by: <select ng-model="sortOrder">
-        <option value="name">Alphabrtically</option>
-        <option value="-age">Oldest</option>
-    </select> 
-    </div>
-  </div>
+  
+
 
 <p> Hi {{name}} - Total number of phones: {{phones.length}}  
   <span ng-show="query.length">
@@ -47,5 +53,6 @@
 </table>
 </p>
 </div>
+<pre>{{phones | filter:query | orderBy:sortOrder | json}} </pre>
 </body>
 </html>
