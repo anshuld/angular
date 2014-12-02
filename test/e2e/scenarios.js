@@ -41,6 +41,31 @@ describe('my app', function() {
 
 
     });
-  });
 
+  it("Should sort the phone list through the drop down list", function(){
+    
+    function getNames() {
+      var phoneNameColumn = element.all(by.repeater('phone in phones').column('phone.name'));
+      return phoneNameColumn.map(function(elm) {
+        return elm.getText();
+      });
+    }
+
+    query.clear();
+    query.sendKeys('tablet');
+
+    expect(getNames()).toEqual([
+      "Motorola XOOM\u2122 with Wi-Fi",
+      "MOTOROLA XOOM\u2122"
+    ]);
+
+    element(by.model('sortOrder')).element(by.css('option[value="name"]')).click();
+
+    expect(getNames()).toEqual([
+      "MOTOROLA XOOM\u2122",
+      "Motorola XOOM\u2122 with Wi-Fi"
+    ]);
+
+  });
+  });
 });

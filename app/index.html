@@ -12,16 +12,25 @@
 <div class="container-fluid">
   <div class="row">
   <div class="col-md-2">
-    Search: <input ng-model="query">
+    Search: <input ng-model="query">{{sortOrder}}
   </div>
   <div class="col-md-2">
   <ul>
-    <li ng-repeat="phone in phones | filter:query">
+    <li ng-repeat="phone in phones | filter:query | orderBy:sortOrder">
       <span>{{phone.name}}</span>
+      <span>{{phone.age}}</span>
       <p>{{phone.snippet}}</p>
     </li>
   </ul>
   </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      Sort by: <select ng-model="sortOrder">
+        <option value="name">Alphabrtically</option>
+        <option value="-age">Oldest</option>
+    </select> 
+    </div>
   </div>
 
 <p> Hi {{name}} - Total number of phones: {{phones.length}}  

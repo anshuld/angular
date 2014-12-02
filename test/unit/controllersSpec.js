@@ -4,16 +4,26 @@
 describe('PhoneCat controllers', function() {
 
   describe('PhoneListCtrl', function(){
+  	var scope, ctrl
 
-    beforeEach(module('phonecatApp'));
+  	beforeEach(module('phonecatApp'));
 
-    it('should create "phones" model with 3 phones', inject(function($controller) {
-      var scope = {},
-          ctrl = $controller('PhoneListCtrl', {$scope:scope});
-
-      expect(scope.phones.length).toBe(3);
-      expect(scope.name).toBe("Jyotu");
+    beforeEach(inject(function($controller) {
+    	scope = {}
+    	ctrl = $controller('PhoneListCtrl', {$scope:scope})
     }));
 
+    it('should create "phones" model with 3 phones', function() {
+      expect(scope.phones.length).toBe(3);
+      expect(scope.name).toBe("Jyotu");
+    });
+
+    it("should start with the newest phones first", function(){
+    	expect(scope.sortOrder).toBe('age');
+    });
+
+    it("Should be named as Jyotu", function(){
+    	expect(scope.name).toBe('Jyotu');
+    })
   });
 });
