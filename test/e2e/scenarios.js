@@ -16,14 +16,14 @@ describe('my app', function() {
 
      var phoneList = element.all(by.repeater("phone in phones"));
 
-     expect(phoneList.count()).toBe(3);
+     expect(phoneList.count()).toBe(20);
 
      query.sendKeys("nexus");
      expect(phoneList.count()).toBe(1);
 
      query.clear();
      query.sendKeys("moto")
-     expect(phoneList.count()).toBe(2);
+     expect(phoneList.count()).toBe(8);
 
      query.clear();
      query.sendKeys("anshul")
@@ -32,7 +32,7 @@ describe('my app', function() {
    });
 
     it("Should have query in the title", function() {
-      
+
       query.clear();
       expect(browser.getTitle()).toMatch(/AKD with\s*/);
 
@@ -42,30 +42,17 @@ describe('my app', function() {
 
     });
 
-  it("Should sort the phone list through the drop down list", function(){
-    
-    function getNames() {
-      var phoneNameColumn = element.all(by.repeater('phone in phones').column('phone.name'));
-      return phoneNameColumn.map(function(elm) {
-        return elm.getText();
+    it("Should be able to click on the thumbnail image", function(){
+      query.sendKeys('nexus');
+      
+      var anchor = element.all(by.css('.phones li a')).first();
+      browser.debugger();
+      console.log(anchor.getTagName());
+
+      anchor.click().then(function () {
+        browser.getLocationAbsUrl();
       });
-    }
-
-    query.clear();
-    query.sendKeys('tablet');
-
-    expect(getNames()).toEqual([
-      "Motorola XOOM\u2122 with Wi-Fi",
-      "MOTOROLA XOOM\u2122"
-    ]);
-
-    element(by.model('sortOrder')).element(by.css('option[value="name"]')).click();
-
-    expect(getNames()).toEqual([
-      "MOTOROLA XOOM\u2122",
-      "Motorola XOOM\u2122 with Wi-Fi"
-    ]);
-
-  });
+    });
+    
   });
 });
