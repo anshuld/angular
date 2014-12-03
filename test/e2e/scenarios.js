@@ -46,11 +46,13 @@ describe('my app', function() {
       query.sendKeys('nexus');
       
       var anchor = element.all(by.css('.phones li a')).first();
-      browser.debugger();
-      console.log(anchor.getTagName());
-
       anchor.click().then(function () {
-        browser.getLocationAbsUrl();
+        browser.getLocationAbsUrl().then(function(url) {
+          console.log(url);
+          console.log(url.split('#')[0]);
+          console.log(url.split('#')[1]);
+          expect(url.split('#')[1]).toBe('/phones/nexus-s');
+        });
       });
     });
     
