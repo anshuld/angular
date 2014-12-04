@@ -42,8 +42,6 @@ describe('my app', function() {
       query.sendKeys('nexus');
       
       var anchor = element.all(by.css('.phones li a')).first();
-      console.log(anchor.getTagName());
-
       anchor.click().then(function () {
         browser.getLocationAbsUrl();
       });
