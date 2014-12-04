@@ -43,4 +43,26 @@ describe('PhoneCat controllers', function() {
     	expect(scope.name).toBe('Jyotu');
     })
   });
+
+  describe('PhoneDetailController', function() {
+
+    var scope, ctrl, $httpBackend;
+
+    beforeEach(module('phonecatApp'));
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, $routeParams) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectGET('phones/xyz.json').respond({name: 'Nexus', age: 1});
+
+      scope = $rootScope.$new();
+      $routeParams.phoneId = 'xyz';
+      ctrl = $controller('PhoneDetailCtrl', {$scope:scope})
+
+    }));
+
+    it('should populate the details for specified phone id', function() {
+      expect(scope.phones).toBeUndefined();
+      $httpBackend.flush();
+      expect(scope.phone).toEqual({name: 'Nexus', age: 1});
+    });
+  });
 });

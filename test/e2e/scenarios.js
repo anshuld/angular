@@ -38,6 +38,7 @@ describe('my app', function() {
 
    });
 
+
     it("Should be able to click on the thumbnail image", function(){
       query.sendKeys('nexus');
       
@@ -57,5 +58,13 @@ describe('my app', function() {
       expect(element(by.binding('phoneId')).getText()).toBe('nexus-s');
     });
 
+
+    it("Should list out thumbnail images in detail page", function(){
+      
+      element.all(by.css('.phone-thumbs li')).then(function(items) {
+        expect(items.length).toBe(4);
+      });
+    });
+    
   });
 });
