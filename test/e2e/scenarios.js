@@ -4,6 +4,13 @@
 
 describe('my app', function() {
 
+  it("index url should redirect to /index.html/#/phones", function() {
+      browser.get('app');
+      browser.getLocationAbsUrl().then(function(url){
+        expect(url.split('#')[1]).toBe('/phones');
+      });
+  });
+
   describe('Phone list view', function() {
 
     beforeEach(function() {
@@ -22,37 +29,35 @@ describe('my app', function() {
      expect(phoneList.count()).toBe(1);
 
      query.clear();
-     query.sendKeys("moto")
+     query.sendKeys("moto");
      expect(phoneList.count()).toBe(8);
 
      query.clear();
-     query.sendKeys("anshul")
+     query.sendKeys("anshul");
      expect(phoneList.count()).toBe(0);
 
    });
-
-    it("Should have query in the title", function() {
-
-      query.clear();
-      expect(browser.getTitle()).toMatch(/AKD with\s*/);
-
-      query.sendKeys('Jyoti Dutta');
-      expect(browser.getTitle()).toMatch(/AKD with\s+Jyoti Dutta/);
-
-
-    });
 
     it("Should be able to click on the thumbnail image", function(){
       query.sendKeys('nexus');
       
       var anchor = element.all(by.css('.phones li a')).first();
-      browser.debugger();
       console.log(anchor.getTagName());
 
       anchor.click().then(function () {
         browser.getLocationAbsUrl();
       });
     });
-    
+  });
+
+  describe('Phone detail view', function() {
+    beforeEach(function() {
+      browser.get('app/#/phones/nexus-s');
+    });
+
+    it("Should display phone specific page", function() {
+      expect(element(by.binding('phoneId')).getText()).toBe('nexus-s');
+    });
+
   });
 });

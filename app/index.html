@@ -1,59 +1,18 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp" ng-controller="PhoneListCtrl">
+<html lang="en" ng-app="phonecatApp">
 <head>
   <meta charset="utf-8">
   <title>AKD with {{query}}</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="container-fluid">
-          <div class="row">
-            Search: <input ng-model="query">{{sortOrder}}
-          </div>
-          <div class="row">
-            
-            Sort by: <select ng-model="sortOrder">
-            <option value="name">Alphabrtically</option>
-            <option value="-age">Oldest</option>
-          </select> 
-          
-        </div>
-      </div>
-    </div>
-    <div class="col-md-10">
-      <ul class="phones">
-        <li ng-repeat="phone in phones | filter:query | orderBy:sortOrder" class="thumbnail">
-          <a href="#/phones/{{phone.id}}" class="thumb"> <img ng-src="{{phone.imageUrl}}" /></a>
-          {{phone.name}}
-          {{phone.age}}
-          <p>{{phone.snippet}}</p>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
+  <div ng-view> </div>
 
-
-  <p> Hi {{name}} - Total number of phones: {{phones.length}}  
-    <span ng-show="query.length">
-      and you have been searching for {{query}}
-    </span>
-  </p>
-
-  <p> <table border=true>
-    <tr>    <th colspan="8">Rows from 1 to 8</th></tr>
-    <tr ng-repeat="i in [0,1,2,3,4,5,6,7]">
-      <td ng-repeat="j in [1,2,3,4,5,6,7,8]">{{j *(i + 1)}}</td>
-    </tr>
-  </table>
-</p>
-</div>
-<pre>{{phones | filter:query | orderBy:sortOrder | json}} </pre>
+  <div ng-include="'./partials/summary.html'"></div>
 </body>
 </html>

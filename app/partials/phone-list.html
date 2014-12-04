@@ -1,0 +1,29 @@
+ <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="container-fluid">
+          <div class="row">
+            Search: <input ng-model="query">{{sortOrder}}
+          </div>
+          <div class="row">
+            
+            Sort by: <select ng-model="sortOrder">
+            <option value="name">Alphabrtically</option>
+            <option value="-age">Oldest</option>
+          </select> 
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy:sortOrder" class="thumbnail">
+          <a href="#/phones/{{phone.id}}" class="thumb"> <img ng-src="{{phone.imageUrl}}" /></a>
+          {{phone.name}}
+          {{phone.age}}
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
