@@ -19,7 +19,20 @@ controllersModule.controller('PhoneDetailCtrl', ['$scope', '$log', '$http', '$ro
 	$log.log($routeParams.phoneId);
 	$scope.phoneId = $routeParams.phoneId;
   $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data){
+    $log.log('inside');
     $scope.phone= data;
+    $scope.mainImageUrl = data.images[0];
   });
+  $log.log('outside')
+
+
+  $scope.setImage = function(imageUrl) {
+    $scope.mainImageUrl = imageUrl;
+  };
+
+  $scope.hello = function(name) {
+    alert('Hello ' + (name || 'Jyotu') + '!!');
+  };
+
 }]);
 

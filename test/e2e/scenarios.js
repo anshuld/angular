@@ -65,6 +65,20 @@ describe('my app', function() {
         expect(items.length).toBe(4);
       });
     });
+
+    it("Should pick the first image as the main", function(){
+      expect(element(by.css('img.phone')).getAttribute('src')).toMatch(/img\/phones\/nexus-s.0.jpg/);
+    });
     
+    it("Should make the selected image as the main", function(){
+      element(by.css('ul.phone-thumbs li:nth-child(3) img')).click();
+      expect(element(by.css('img.phone')).getAttribute('src')).toMatch(/img\/phones\/nexus-s.2.jpg/);
+
+      element(by.css('ul.phone-thumbs li:nth-child(2) img')).click();
+      expect(element(by.css('img.phone')).getAttribute('src')).toMatch(/img\/phones\/nexus-s.1.jpg/);
+
+    });
+    
+
   });
 });
