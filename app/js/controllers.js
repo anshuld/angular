@@ -4,27 +4,22 @@
 
 var controllersModule = angular.module('phonecatControllers', []);
 
-controllersModule.controller('PhoneListCtrl', ['$scope', '$http', function($scope, $http) {
-  $http.get('/app/phones/phones.json').success(function(data){
-    $scope.phones = data;//.splice(0, 5);  
-  });
-  
-  $scope.name = "Jyotu";
-  $scope.sortOrder = "age";
-  // $scope.query = 'nexus';
+controllersModule.controller('PhoneListCtrl', ['$scope', '$http', 'Phone', function($scope, $http, Phone) {
+  $scope.phones = Phone.query()
+
+$scope.name = "Jyotu";
+$scope.sortOrder = "age";
+// $scope.query = 'nexus';
 }]);
 
 
-controllersModule.controller('PhoneDetailCtrl', ['$scope', '$log', '$http', '$routeParams', function($scope, $log, $http, $routeParams) {
+controllersModule.controller('PhoneDetailCtrl', ['$scope', '$log', '$http', '$routeParams', 'Phone', function($scope, $log, $http, $routeParams, Phone) {
 	$log.log($routeParams.phoneId);
 	$scope.phoneId = $routeParams.phoneId;
-  $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data){
-    $log.log('inside');
-    $scope.phone= data;
-    $scope.mainImageUrl = data.images[0];
-  });
-  $log.log('outside')
 
+  $scope.phone = Phone.get({phoneId: $scope.phoneId}, function(phone){
+    $scope.mainImageUrl = phone.images[0];
+  });
 
   $scope.setImage = function(imageUrl) {
     $scope.mainImageUrl = imageUrl;
